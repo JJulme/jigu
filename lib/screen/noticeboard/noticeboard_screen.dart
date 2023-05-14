@@ -1,25 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:jigu/screen/noticeboard_detail_screen.dart';
+import 'package:jigu/screen/noticeboard/noticeboard_kategorie_screen.dart';
+import 'package:jigu/screen/search/search_screen.dart';
+import 'noticeboard_detail_screen.dart';
 
-class NoticeBoardScreen extends StatelessWidget {
-  const NoticeBoardScreen({super.key});
+class NoticeboardScreen extends StatelessWidget {
+  const NoticeboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("홍보글 게시판"),
+        title: const Text("팔아요"),
         actions: [
+          //카테고리 버튼 설정
           ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                "지역설정",
-                style: TextStyle(color: Colors.white),
-              )),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+            //카테고리 버튼 누르면 화면 전환
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const NoticeboardKategorieScreen(),
+                  ));
+            },
+            //카테고리 텍스트 설정
+            child: const Text(
+              "카테고리",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text(
+              "지역설정",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          //검색화면에 검색과 토글버튼 생성 예정
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SearchScreen(),
+                    ));
+              },
+              icon: const Icon(Icons.search)),
         ],
       ),
       body: GestureDetector(
+        //홍보글을 누르면 해당 상세내용으로 넘어감
         onTap: () {
           Navigator.push(
             context,

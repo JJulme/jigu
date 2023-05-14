@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jigu/screen/chat_detail_screen.dart';
+import 'package:jigu/screen/search/search_screen.dart';
+import 'chat_detail_screen.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -9,6 +10,17 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("채팅 화면"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SearchScreen(),
+                    ));
+              },
+              icon: const Icon(Icons.search)),
+        ],
       ),
       body: GestureDetector(
         onTap: () {
