@@ -22,7 +22,9 @@ class NoticeboardScreen extends StatelessWidget {
                     builder: (context) => const NoticeboardKategorieScreen(),
                   ));
             },
-            //카테고리 텍스트 설정
+            //버튼 입체감 없애기
+            style: ElevatedButton.styleFrom(elevation: 0),
+            //텍스트 설정
             child: const Text(
               "카테고리",
               style: TextStyle(color: Colors.white),
@@ -30,6 +32,9 @@ class NoticeboardScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {},
+            //버튼 입체감 없애기
+            style: ElevatedButton.styleFrom(elevation: 0),
+            //텍스트 설정
             child: const Text(
               "지역설정",
               style: TextStyle(color: Colors.white),

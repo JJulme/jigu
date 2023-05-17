@@ -12,14 +12,15 @@ class ChatScreen extends StatelessWidget {
         title: const Text("채팅 화면"),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SearchScreen(),
-                    ));
-              },
-              icon: const Icon(Icons.search)),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchScreen(),
+                  ));
+            },
+            icon: const Icon(Icons.search),
+          ),
         ],
       ),
       body: GestureDetector(

@@ -11,7 +11,9 @@ class SeekScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("찾아요"),
         actions: [
+          //검색버튼
           IconButton(
+              //누르면 화면 이동
               onPressed: () {
                 Navigator.push(
                     context,
@@ -21,19 +23,26 @@ class SeekScreen extends StatelessWidget {
               },
               icon: const Icon(Icons.search)),
           PopupMenuButton(
+            //PopupMenuItem onTap 사용안하고 작동 방법
+            //https://github.com/flutter/flutter/issues/81682
             itemBuilder: (context) => [
-              const PopupMenuItem(child: Text("작성한글")),
-              PopupMenuItem(
-                child: const Text("작성하기"),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SeekWriteScreen(),
-                      ));
-                },
-              )
+              const PopupMenuItem(value: 0, child: Text("작성한글")),
+              const PopupMenuItem(value: 1, child: Text("작성하기")),
             ],
+            onSelected: (choice) {
+              switch (choice) {
+                //작성한글
+                case 0:
+                  break;
+                //작성하기
+                case 1:
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SeekWriteScreen()),
+                  );
+              }
+            },
           )
         ],
       ),
