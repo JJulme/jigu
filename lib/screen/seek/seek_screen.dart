@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jigu/screen/search/search_screen.dart';
+import 'package:jigu/screen/seek/seek_detail_screen.dart';
 import 'package:jigu/screen/seek/seek_write_screen.dart';
 
 class SeekScreen extends StatelessWidget {
@@ -47,8 +48,13 @@ class SeekScreen extends StatelessWidget {
         ],
       ),
       body: GestureDetector(
-        //홍보글을 누르면 해당 상세내용으로 넘어감
-        onTap: () {},
+        //찾는글을 누르면 해당 상세내용으로 넘어감
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SeekDetailScreen()),
+          );
+        },
         child: ListView(
           children: [
             Container(
