@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -12,17 +14,25 @@ class SeekWriteScreen extends StatefulWidget {
 enum Range { seller, public }
 
 class _SeekWriteScreenState extends State<SeekWriteScreen> {
-  //갤러리 이미지 불러오기
+  //갤러리 이미지 여러개 불러오기 - https://dalgoodori.tistory.com/38
   //ImagePicker 초기화
   final ImagePicker _picker = ImagePicker();
   //이미지들 담을 빈 리스트 선언
-  final List<XFile?> _pickedimgs = [];
+  List<XFile>? _pickedimgs;
   //누르면 갤러리 열리는 함수 생성
   void getImages() async {
-    final List<XFile> images = await _picker.pickMultiImage();
-    setState(() {
-      _pickedimgs.addAll(images);
-    });
+    try {
+      List<XFile>? images = await _picker.pickMultiImage();
+      setState(() {
+        if (images.isNotEmpty) {
+          _pickedimgs = images;
+        } else {
+          print("선택된 사진이 없습니다.");
+        }
+      });
+    } catch (e) {
+      print("이미지를 가져오는데 오류발생");
+    }
   }
 
   //초기 판매자 Radio 버튼으로 설정됨
@@ -68,37 +78,28 @@ class _SeekWriteScreenState extends State<SeekWriteScreen> {
                 const SizedBox(height: 20),
                 //ListView를 감싸 에러 방지
                 SizedBox(
-                  height: 95,
+                  height: 105,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      //이미지 추가 버튼
-                      OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Colors.grey),
-                            //내부 여백으로 크기 설정
-                            padding: const EdgeInsets.all(30),
-                            //테두리 둥글게 설정
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                        onPressed: () => getImages(),
-                        child: const Icon(Icons.add_a_photo_outlined, size: 35),
-                      ),
+                      //이미지 추가 버튼 - 버튼 크기 설정과 마진설정을 위해 Container 사용
                       Container(
+                        height: 95,
                         width: 95,
-                        color: Colors.amber,
-                        margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 10, 10, 0),
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                              side: const BorderSide(color: Colors.grey),
+                              //테두리 둥글게 설정
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                          onPressed: () => getImages(),
+                          child:
+                              const Icon(Icons.add_a_photo_outlined, size: 35),
+                        ),
                       ),
-                      Container(
-                        width: 95,
-                        color: Colors.red,
-                        margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                      ),
-                      Container(
-                        width: 95,
-                        color: Colors.blue,
-                        margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                      ),
+                      //선택한 이미지가 있다면 표시
+                      imageContainer()
                     ],
                   ),
                 ),
@@ -169,6 +170,66 @@ class _SeekWriteScreenState extends State<SeekWriteScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  //선택한 이미지가 보여지는 Container
+  Widget imageContainer() {
+    return _pickedimgs != null
+        ? Wrap(
+            children: _pickedimgs!.map((img) {
+              //Stack 컨터이너 박스에 항목 삭제 버튼 겹치기 위해
+              return Stack(
+                children: <Widget>[
+                  Container(
+                    height: 95,
+                    width: 95,
+                    //불러온 이미지 왼쪽으로 15만큼 간격주기
+                    margin: const EdgeInsets.fromLTRB(5, 10, 10, 0),
+                    //컨테이너 모서리 둥글게 하고 이미지가 넘치지 않게 설정
+                    clipBehavior: Clip.hardEdge,
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                    //이미지 불러오고 컨테이너에 꽉차게 채우기
+                    child: Image.file(File(img.path), fit: BoxFit.cover),
+                  ),
+                  Positioned(
+                      top: -11,
+                      right: -11,
+                      child: IconButton(
+                        //버튼을 누르면 해상 사진 선택목록에서 삭제
+                        onPressed: () {
+                          setState(() {
+                            _pickedimgs!.remove(img);
+                          });
+                        },
+                        //아이콘의 X부분이 투명해서 안의 내용을 채울수 있도록 새로 만들었음
+                        icon: iconCancel(),
+                      ))
+                ],
+              );
+              //map과 toList 세트
+            }).toList(),
+          )
+        //아무것도 선택되지 않았다면 빈 컨테이너 반환
+        : Container();
+  }
+
+  //사진삭제 아이콘 설정 함수
+  Stack iconCancel() {
+    return Stack(
+      children: <Widget>[
+        Positioned.fill(
+            child: Container(
+          decoration:
+              const BoxDecoration(shape: BoxShape.circle, color: Colors.grey),
+        )),
+        const Icon(
+          Icons.cancel,
+          color: Colors.white,
+          size: 25,
+        )
+      ],
     );
   }
 }

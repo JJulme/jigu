@@ -37,6 +37,7 @@ class _NoticeboardDetailScreenState extends State<NoticeboardDetailScreen> {
         //화면넘칠시 스크롤 생성
         child: CustomScrollView(
           slivers: <Widget>[
+            //화면 위에 고정될 내용
             SliverToBoxAdapter(
               child: Container(
                 padding: const EdgeInsets.all(10),
@@ -44,54 +45,74 @@ class _NoticeboardDetailScreenState extends State<NoticeboardDetailScreen> {
                 alignment: Alignment.topLeft,
                 //본문 내용
                 child: const Text(
-                  "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세",
+                  "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세",
                   style: TextStyle(fontSize: 50),
                 ),
               ),
             ),
+            //판매자 정보
+            //화면 아래에 고정됨 - 스크롤 생성될 내용에도 화면 아래에 위치
             SliverFillRemaining(
               hasScrollBody: false,
               child: Align(
+                //화면 아래로 위치 설정
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   padding: const EdgeInsets.all(10),
-                  height: 140,
-                  child: Row(
+                  height: 190,
+                  child: Column(
                     children: [
-                      //프로필 사진
-                      const Icon(Icons.person, size: 100),
-                      //중간 작은 공백
-                      const SizedBox(width: 10),
-                      //판매자 정보
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      const SizedBox(height: 5),
+                      const Divider(color: Colors.grey, thickness: 1.0),
+                      const SizedBox(height: 20),
+                      Row(
                         children: [
-                          InkWell(
-                            onTap: () {
-                              Fluttertoast.showToast(
-                                msg: "판매자 정보를 보여주는 페이지로 넘어가야함.",
-                                gravity: ToastGravity.BOTTOM,
-                                backgroundColor: Colors.grey.withOpacity(0.9),
-                                toastLength: Toast.LENGTH_SHORT,
-                              );
-                            },
-                            child: const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "세븐일레븐 부산수영푸른빌점",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text("마트/편의점",
-                                    style: TextStyle(
-                                        fontSize: 15, color: Colors.grey)),
-                              ],
-                            ),
+                          //프로필 사진
+                          Container(
+                            height: 90,
+                            width: 90,
+                            decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: const Center(child: Text("프사")),
                           ),
-                          const SizedBox(height: 5),
-                          copyClipboardToast("부산 수영구 망미번영로16번길 74"),
-                          const SizedBox(height: 5),
-                          copyClipboardToast("010-8285-3283"),
+                          //중간 작은 공백
+                          const SizedBox(width: 10),
+                          //판매자 정보
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Fluttertoast.showToast(
+                                    msg: "판매자 정보를 보여주는 페이지로 넘어가야함.",
+                                    gravity: ToastGravity.BOTTOM,
+                                    backgroundColor:
+                                        Colors.grey.withOpacity(0.9),
+                                    toastLength: Toast.LENGTH_SHORT,
+                                  );
+                                },
+                                child: const Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "세븐일레븐 부산수영푸른빌점",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    Text("마트/편의점",
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.grey)),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              copyClipboardToast("부산 수영구 망미번영로16번길 74"),
+                              const SizedBox(height: 5),
+                              copyClipboardToast("010-8285-3283"),
+                            ],
+                          ),
                         ],
                       ),
                     ],

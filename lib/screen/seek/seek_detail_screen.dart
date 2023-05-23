@@ -30,9 +30,11 @@ class _SeekDetailScreenState extends State<SeekDetailScreen> {
             Row(
               children: [
                 Container(
-                  color: Colors.grey,
                   height: 80,
                   width: 80,
+                  decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(50)),
                   child: const Center(child: Text("프사")),
                 ),
                 const SizedBox(width: 15),
