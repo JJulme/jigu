@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:jigu/screen/login/login_screen.dart';
 import 'package:jigu/screen/mypage/mypage_modify_screen.dart';
 import 'package:jigu/screen/mypage/mypage_notice_screen.dart';
 import 'package:jigu/screen/mypage/mypage_question_screen.dart';
@@ -61,14 +63,17 @@ class MypageScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     //닉네임, 주소 자리
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("닉네임",
+                        const Text("닉네임",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w600)),
-                        SizedBox(height: 5),
-                        Text("해운대구 중동", style: TextStyle(fontSize: 15)),
+                        const SizedBox(height: 5),
+                        const Text("해운대구 중동", style: TextStyle(fontSize: 15)),
+                        OutlinedButton(
+                            onPressed: () => Get.to(() => const LoginScreen()),
+                            child: const Text("Login")),
                       ],
                     ),
                   ],

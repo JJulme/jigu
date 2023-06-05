@@ -15,7 +15,6 @@ class _SearchScreenState extends State<SearchScreen> {
     const Tab(text: "팔아요"),
     const Tab(text: "찾아요"),
     const Tab(text: "판매자"),
-    const Tab(text: "나의 채팅"),
   ];
   @override
   Widget build(BuildContext context) {
@@ -53,13 +52,15 @@ class _SearchScreenState extends State<SearchScreen> {
                   //입력전 힌트 설정
                   hintText: "검색어를 입력하세요",
                   //텍스트 한번에 지우는 버튼 설정
-                  suffixIcon: IconButton(
-                    onPressed: () => _controller.clear(),
-                    icon: const Icon(
-                      Icons.cancel_sharp,
-                      size: 20,
-                    ),
-                  ),
+                  suffixIcon: _controller.text.isNotEmpty
+                      ? IconButton(
+                          onPressed: () => _controller.clear(),
+                          icon: const Icon(
+                            Icons.cancel_sharp,
+                            size: 20,
+                          ),
+                        )
+                      : null,
                 ),
               ),
             ),

@@ -8,8 +8,71 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _outoLogin = false;
+  final bool _outoId = false;
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return GestureDetector(
+      //키보드 내리기
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("로그인 & 회원가입"),
+        ),
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+          child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 200,
+                    height: 200,
+                    child: Image.asset(
+                      "images/jigu3.png",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  const TextField(
+                    decoration: InputDecoration(
+                        labelText: "전화번호 또는 이메일", border: OutlineInputBorder()),
+                  ),
+                  const SizedBox(height: 20),
+                  const TextField(
+                    decoration: InputDecoration(
+                        labelText: "비밀번호", border: OutlineInputBorder()),
+                  ),
+                  const SizedBox(height: 20),
+                  CheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      visualDensity:
+                          const VisualDensity(vertical: -4, horizontal: -4),
+                      title: const Text("자동 로그인"),
+                      value: _outoLogin,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _outoLogin = value!;
+                        });
+                      }),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 55,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("로그인", style: TextStyle(fontSize: 20)),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextButton(
+                      onPressed: () {}, child: const Text("계정 / 비밀번호를 잊으셨나요?"))
+                ]),
+          ),
+        ),
+      ),
+    );
   }
 }
