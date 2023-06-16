@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:jigu/screen/noticeboard/noticeboard_expansiontile_screen.dart';
 import 'package:jigu/screen/noticeboard/noticeboard_kategorie_screen.dart';
 import 'package:jigu/screen/search/search_screen.dart';
 import 'noticeboard_detail_screen.dart';
 
-class NoticeboardScreen extends StatelessWidget {
+class NoticeboardScreen extends StatefulWidget {
   const NoticeboardScreen({super.key});
+
+  @override
+  State<NoticeboardScreen> createState() => _NoticeboardScreenState();
+}
+
+class _NoticeboardScreenState extends State<NoticeboardScreen> {
+  //lib\screen\noticeboard\noticeboard_kategorie_screen.dart 에서 데이터 받는 변수
+  late dynamic selectKategorie = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -16,28 +26,27 @@ class NoticeboardScreen extends StatelessWidget {
           ElevatedButton(
             //카테고리 버튼 누르면 화면 전환
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const NoticeboardKategorieScreen(),
-                  ));
+              Get.to(() => const NoticeboardKategorieScreen());
+            },
+            //버튼 입체감 없애기
+            style: ElevatedButton.styleFrom(elevation: 0),
+            //텍스트 설정
+            child: Text(
+              //받은 데이터가 비어있으면 "카테고리", 선택되었다면 선택된 카테고리 이름
+              (selectKategorie == null) ? "카테고리" : selectKategorie,
+              style: const TextStyle(color: Colors.white, fontSize: 17),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.to(() => const NoticeboardExpantiontileScreen());
             },
             //버튼 입체감 없애기
             style: ElevatedButton.styleFrom(elevation: 0),
             //텍스트 설정
             child: const Text(
-              "카테고리",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            //버튼 입체감 없애기
-            style: ElevatedButton.styleFrom(elevation: 0),
-            //텍스트 설정
-            child: const Text(
               "지역설정",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white, fontSize: 17),
             ),
           ),
           //검색화면에 검색과 토글버튼 생성 예정
@@ -64,42 +73,42 @@ class NoticeboardScreen extends StatelessWidget {
         child: ListView(
           children: [
             Container(
-              color: Colors.blue.shade100,
+              color: Colors.indigo.shade100,
               height: 100,
               child: const Center(child: Text("정현진")),
             ),
             Container(
-              color: Colors.blue.shade200,
+              color: Colors.indigo.shade200,
               height: 100,
               child: const Center(child: Text("임정민")),
             ),
             Container(
-              color: Colors.blue.shade300,
+              color: Colors.indigo.shade300,
               height: 100,
               child: const Center(child: Text("김광호")),
             ),
             Container(
-              color: Colors.blue.shade400,
+              color: Colors.indigo.shade400,
               height: 100,
               child: const Center(child: Text("김기환")),
             ),
             Container(
-              color: Colors.blue.shade100,
+              color: Colors.indigo.shade100,
               height: 100,
               child: const Center(child: Text("정현진")),
             ),
             Container(
-              color: Colors.blue.shade200,
+              color: Colors.indigo.shade200,
               height: 100,
               child: const Center(child: Text("임정민")),
             ),
             Container(
-              color: Colors.blue.shade300,
+              color: Colors.indigo.shade300,
               height: 100,
               child: const Center(child: Text("김광호")),
             ),
             Container(
-              color: Colors.blue.shade400,
+              color: Colors.indigo.shade400,
               height: 100,
               child: const Center(child: Text("김기환")),
             ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:jigu/model/kategorie_model.dart';
 
 class NoticeboardKategorieScreen extends StatefulWidget {
   const NoticeboardKategorieScreen({super.key});
@@ -10,62 +12,66 @@ class NoticeboardKategorieScreen extends StatefulWidget {
 
 class _NoticeboardKategorieScreenState
     extends State<NoticeboardKategorieScreen> {
-  //대분류 카테고리
-  List<String> mainKategorie = ["음식점", "마트/편의점", "카페/디저트"];
-  //소분류 음식점
-  List<String> foodKategorie = [
-    "고기집",
-    "한식",
-    "중식",
-    "양식",
-    "아시안",
-    "패스트푸드",
-    "이자카야"
-  ];
+  //lib\model\kategorie_model.dart 에서 카테고리 가져오기
+  final kmodel = Kategorie().kategorie;
   @override
   Widget build(BuildContext context) {
-    //대분류의 개수반환
-    int mainIndex = mainKategorie.length;
-    //대분류 개수에 맞게 bool 리스트 생성
-    List<bool> isPanal = List.generate(mainIndex, (_) => false);
-
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
-          )
-        ],
+        title: const Text("카테고리를 선택해주세요."),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
+          child: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.all(15),
+          child: ExpansionPanelList.radio(
             children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                //ExpansionPanal 설명 유튜브 https://www.youtube.com/watch?v=2aJZzRMziJc
-                child: ExpansionPanelList(
-                  expansionCallback: (panelIndex, isExpanded) => setState(() {
-                    isPanal[panelIndex] = !isExpanded;
-                  }),
-                  children: [
-                    for (var i in mainKategorie)
-                      ExpansionPanel(
-                        //대분류의 이름이 들어갈 패널이름
-                        headerBuilder: (context, isOpened) =>
-                            Center(child: Text(i)),
-
-                        body: const Text("Open"),
-                        isExpanded: isPanal[0],
-                      ),
-                  ],
-                ),
-              ),
+              for (var title in kmodel.keys)
+                ExpansionPanelRadio(
+                  //패널의 위치값
+                  value: Text(title),
+                  //헤더 전체 클릭시 확장
+                  canTapOnHeader: true,
+                  //패널 제목 설정
+                  headerBuilder: (context, isExpanded) => Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.symmetric(vertical: 15),
+                      child: Text(
+                        title,
+                        style: const TextStyle(fontSize: 20),
+                      )),
+                  //패널 펼쳤을 때 내용 설정
+                  body: GridView.builder(
+                    //index의 값 범위 지정해줌
+                    itemCount: kmodel[title]?.length,
+                    //높이 지정 에러 방지
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true, //
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 4 / 1,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10),
+                    itemBuilder: (context, index) {
+                      return TextButton(
+                        //눌렀을 경우 어떻게 될지 정해야함
+                        onPressed: () {
+                          // Get.to(NoticeboardScreen(), arguments: kmodel[title]![index]);
+                          Get.back(result: kmodel[title]![index]);
+                        },
+                        child: Text(
+                          kmodel[title]![index],
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      );
+                    },
+                  ),
+                )
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }

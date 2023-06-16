@@ -12,11 +12,15 @@ class LoginSignupScreen extends StatefulWidget {
 }
 
 class _LoginSignupScreenState extends State<LoginSignupScreen> {
+  //노드 설정
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
   final FocusNode _passwordCompareFocus = FocusNode();
+  //폼 사용을 위한 글로벌 키 설정
   final formKey = GlobalKey<FormState>();
+  //비밀번호 비교를 위한 컨트롤러 설정
   final _passwordController = TextEditingController();
+  //값 저장을 위한 설정
   String email = "";
   String password1 = "";
   String password2 = "";
@@ -51,8 +55,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                             ),
                           ),
                           Container(
-                              margin: const EdgeInsets.fromLTRB(10, 0, 0, 25),
-                              height: 50,
+                              margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              height: 48,
                               width: 70,
                               child: ElevatedButton(
                                 onPressed: () {},
@@ -77,7 +81,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                           ),
                           Container(
                               margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                              height: 50,
+                              height: 48,
                               width: 70,
                               child: ElevatedButton(
                                   onPressed: () {}, child: const Text("확인")))
@@ -123,6 +127,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
 
   InputDecoration _textFormDecoration(hintText, helperText) {
     return InputDecoration(
+      contentPadding: const EdgeInsets.all(10),
       border: const OutlineInputBorder(),
       hintText: hintText,
       helperText: helperText,
@@ -176,8 +181,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
         obscureText: true,
         keyboardType: TextInputType.visiblePassword,
         focusNode: _passwordCompareFocus,
-        decoration:
-            _textFormDecoration("비밀번호 설정", "특수문자, 대소문자, 숫자 포함 8자 이상 입력하세요."),
+        decoration: _textFormDecoration("비밀번호 확인", "비밀번호를 한번더 입력해주세요."),
         validator: (value) => CheckValidatePassword().comeparePassword(
             _passwordCompareFocus, _passwordController.text, value!));
   }

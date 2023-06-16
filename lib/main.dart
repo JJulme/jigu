@@ -11,8 +11,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      home: HomeScreen(),
+    return GetMaterialApp(
+      theme: ThemeData(primarySwatch: Colors.indigo),
+      home: const HomeScreen(),
     );
   }
 }

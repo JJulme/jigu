@@ -28,7 +28,7 @@ class _LoginTosScreenState extends State<LoginTosScreen> {
   //bool 값에 따라 반환하는 아이콘 색이 바뀜
   dynamic changeIcon({required bool checked}) {
     return checked
-        ? const Icon(Icons.check_circle, size: 35, color: Colors.green)
+        ? const Icon(Icons.check_circle, size: 35, color: Colors.indigo)
         : const Icon(Icons.check_circle_outline, size: 35, color: Colors.grey);
   }
 
