@@ -55,7 +55,7 @@ class _NoticeboardKategorieScreenState
                             crossAxisSpacing: 10),
                     itemBuilder: (context, index) {
                       return TextButton(
-                        //눌렀을 경우 어떻게 될지 정해야함
+                        //누른 항목이 전달됨
                         onPressed: () {
                           // Get.to(NoticeboardScreen(), arguments: kmodel[title]![index]);
                           Get.back(result: kmodel[title]![index]);
