@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jigu/screen/search/search_screen.dart';
 import 'package:jigu/screen/seek/seek_detail_screen.dart';
 import 'package:jigu/screen/seek/seek_write_screen.dart';
 
-class SeekScreen extends StatelessWidget {
+class SeekScreen extends StatefulWidget {
   const SeekScreen({super.key});
+
+  @override
+  State<SeekScreen> createState() => _SeekScreenState();
+}
+
+class _SeekScreenState extends State<SeekScreen> {
+  var seeks = [
+    "찾는글 제목이 들어갑니다.",
+    "콘치즈 있는 횟집 찾습니다.",
+    "파란장미 파는 꽃집 찾습니다.",
+    "포토카드 뽑을 수 있는 곳을 찾습니다.",
+    "많은양의 문서파기 할 수 있는 곳을 찾습니다.",
+    "사진과 같은 부품을 찾습니다.",
+    "짱구 지비츠 파는곳을 알려주세요.",
+    "앵무새 진료가능한 동물병원 찾아요.",
+  ];
+  var colorCode = [100, 300, 400, 500, 100, 300, 400, 500];
 
   @override
   Widget build(BuildContext context) {
@@ -48,53 +66,56 @@ class SeekScreen extends StatelessWidget {
         ],
       ),
       body: GestureDetector(
-        //찾는글을 누르면 해당 상세내용으로 넘어감
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const SeekDetailScreen()),
-          );
-        },
-        child: ListView(
-          children: [
-            Container(
-              color: Colors.blue.shade100,
-              height: 100,
-              child: const Center(child: Text("카네이션 파는 꽃집 찾아요.")),
-            ),
-            Container(
-              color: Colors.blue.shade200,
-              height: 100,
-              child: const Center(child: Text("관악구 명이나물 나오는 고기집 찾아요.")),
-            ),
-            Container(
-              color: Colors.blue.shade300,
-              height: 100,
-              child: const Center(child: Text("신림동 빵집 선반제작 업체 찾아요.")),
-            ),
-            Container(
-              color: Colors.blue.shade400,
-              height: 100,
-              child: const Center(child: Text("포토카드 출력할 수 있는곳 찾아요.")),
-            ),
-            Container(
-              color: Colors.blue.shade100,
-              height: 100,
-              child: const Center(child: Text("말통 판매하는 철물점 찾아요.")),
-            ),
-            Container(
-              color: Colors.blue.shade200,
-              height: 100,
-              child: const Center(child: Text("서울에서 경기도 용인까지 퀵가능한 업체 찾습니다.")),
-            ),
-            Container(
-              color: Colors.blue.shade300,
-              height: 100,
-              child: const Center(child: Text("오늘 점심 뭐먹어요?")),
-            )
-          ],
-        ),
-      ),
+          //찾는글을 누르면 해당 상세내용으로 넘어감
+          onTap: () {
+            Get.to(() => const SeekDetailScreen());
+          },
+          child: ListView.builder(
+            itemCount: seeks.length,
+            itemBuilder: (context, index) {
+              return Container(
+                padding: const EdgeInsets.all(15),
+                height: 120,
+                color: Colors.indigo[colorCode[index]],
+                child: Row(
+                  children: [
+                    Container(
+                      height: 90,
+                      width: 90,
+                      margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+                      decoration: const BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: const Center(child: Text("사진, 없을경우 생략")),
+                    ),
+                    //Flexible 텍스트 넘침 방지
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //찾는글 제목
+                          Text(
+                            seeks[index],
+                            overflow: TextOverflow.clip,
+                            softWrap: false,
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 5),
+                          const Text(
+                            "안녕하세요 이곳에는 찾는글 내용이 들어갑니다. 보이는 내용은 최대 2줄이고 넘을 경우 나머지는 잘리게 됩니다.",
+                            maxLines: 2,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+          )),
     );
   }
 }

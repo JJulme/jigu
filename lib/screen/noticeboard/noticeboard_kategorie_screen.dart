@@ -57,7 +57,6 @@ class _NoticeboardKategorieScreenState
                       return TextButton(
                         //누른 항목이 전달됨
                         onPressed: () {
-                          // Get.to(NoticeboardScreen(), arguments: kmodel[title]![index]);
                           Get.back(result: kmodel[title]![index]);
                         },
                         child: Text(

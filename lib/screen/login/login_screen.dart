@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jigu/screen/login/login_forget_screen.dart';
 import 'package:jigu/screen/login/login_tos_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -100,7 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 10),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(() => const LoginForgetScreen());
+                    },
                     child: const Text("아이디 / 비밀번호를 잊으셨나요?"),
                   ),
                   Row(

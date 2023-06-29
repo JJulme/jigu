@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:jigu/screen/seller/seller_screen.dart';
 import 'package:share/share.dart';
 
 class NoticeboardDetailScreen extends StatefulWidget {
@@ -84,13 +86,7 @@ class _NoticeboardDetailScreenState extends State<NoticeboardDetailScreen> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Fluttertoast.showToast(
-                                    msg: "판매자 정보를 보여주는 페이지로 넘어가야함.",
-                                    gravity: ToastGravity.BOTTOM,
-                                    backgroundColor:
-                                        Colors.grey.withOpacity(0.9),
-                                    toastLength: Toast.LENGTH_SHORT,
-                                  );
+                                  Get.to(() => const SellerScreen());
                                 },
                                 child: const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
