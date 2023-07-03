@@ -101,7 +101,7 @@ class _NoticeboardScreenState extends State<NoticeboardScreen> {
                         color: Colors.grey,
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
-                      child: const Center(child: Text("사진, 없을경우 프사")),
+                      child: const Center(child: Text("사진, 없을경우 판매자프사")),
                     ),
                     //Flexible 텍스트 넘침 방지
                     const Flexible(

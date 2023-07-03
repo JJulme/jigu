@@ -18,6 +18,18 @@ class _MypageModifyScreenState extends State<MypageModifyScreen> {
           //타이틀 여백 설정 - 없애버림
           titleSpacing: 0,
           title: const Text("프로필 수정"),
+          actions: [
+            //완료 버튼
+            ElevatedButton(
+              onPressed: () {},
+              //버튼 입체감 없애기
+              style: ElevatedButton.styleFrom(elevation: 0),
+              child: const Text(
+                "완료",
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            ),
+          ],
         ),
         body: SafeArea(
             child: Container(
@@ -30,6 +42,7 @@ class _MypageModifyScreenState extends State<MypageModifyScreen> {
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
                 decoration: const BoxDecoration(
                     shape: BoxShape.circle, color: Colors.grey),
+                child: const Center(child: Text("프사변경")),
               ),
               myTextField('닉네임'),
               const SizedBox(height: 15),
