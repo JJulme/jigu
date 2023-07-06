@@ -47,6 +47,7 @@ class _NoticeboardKategorieScreenState
                     //높이 지정 에러 방지
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true, //
+                    //GridView가 나올대 보여질 규칙 설정
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,

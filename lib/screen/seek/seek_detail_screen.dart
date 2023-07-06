@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:jigu/screen/seek/seek_detail_list_screen.dart';
 
 class SeekDetailScreen extends StatefulWidget {
   const SeekDetailScreen({super.key});
@@ -39,15 +41,20 @@ class _SeekDetailScreenState extends State<SeekDetailScreen> {
                       child: const Center(child: Text("프사")),
                     ),
                     const SizedBox(width: 15),
-                    const Column(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("닉네임",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600)),
-                        SizedBox(height: 10),
-                        Text("부산 수영구 광안리")
+                        InkWell(
+                          onTap: () {
+                            Get.to(() => const SeekDetailListScreen());
+                          },
+                          child: const Text("닉네임",
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w600)),
+                        ),
+                        const SizedBox(height: 10),
+                        const Text("부산 수영구 광안리")
                       ],
                     )
                   ],

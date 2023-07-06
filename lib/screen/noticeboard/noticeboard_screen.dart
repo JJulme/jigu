@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jigu/screen/noticeboard/noticeboard_expansiontile_screen.dart';
 import 'package:jigu/screen/noticeboard/noticeboard_kategorie_screen.dart';
+import 'package:jigu/screen/noticeboard/noticeboard_place_screen.dart';
 import 'package:jigu/screen/search/search_screen.dart';
 import 'noticeboard_detail_screen.dart';
 
@@ -15,6 +15,7 @@ class NoticeboardScreen extends StatefulWidget {
 class _NoticeboardScreenState extends State<NoticeboardScreen> {
   //선택하는 값 초기화
   var selectKategorie = "";
+  var selectPlace = "";
   //카테고리, 지역설정에서 데이터 받는 함수
   selcetValue(dynamic value, String text) {
     if (value == "") {
@@ -56,15 +57,23 @@ class _NoticeboardScreenState extends State<NoticeboardScreen> {
             ),
           ),
           ElevatedButton(
-            onPressed: () {
-              Get.to(() => const NoticeboardExpantiontileScreen());
+            onPressed: () async {
+              //선택할 경우
+              try {
+                selectPlace =
+                    await Get.to(() => const NoticeboardPlaceScreen());
+                //선택안하고 돌아올경우
+              } catch (e) {
+                selectPlace = selectPlace;
+              }
+              setState(() {});
             },
             //버튼 입체감 없애기
             style: ElevatedButton.styleFrom(elevation: 0),
             //텍스트 설정
-            child: const Text(
-              "지역설정",
-              style: TextStyle(color: Colors.white, fontSize: 17),
+            child: Text(
+              selcetValue(selectPlace, "지역설정"),
+              style: const TextStyle(color: Colors.white, fontSize: 17),
             ),
           ),
           //검색화면에 검색과 토글버튼 생성 예정

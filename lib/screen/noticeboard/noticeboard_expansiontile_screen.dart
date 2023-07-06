@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jigu/model/kategorie_model.dart';
+import 'package:jigu/model/place_model.dart';
 
 class NoticeboardExpantiontileScreen extends StatefulWidget {
   const NoticeboardExpantiontileScreen({super.key});
@@ -13,6 +14,7 @@ class _NoticeboardExpantiontileScreenState
     extends State<NoticeboardExpantiontileScreen> {
   //lib\model\kategorie_model.dart 에서 카테고리 가져오기
   final kmodel = Kategorie().kategorie;
+  final pmodel = Place().place;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class _NoticeboardExpantiontileScreenState
                         //높이 지정 에러 방지
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true, //
+                        //GridView가 나올대 보여질 규칙 설정
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,

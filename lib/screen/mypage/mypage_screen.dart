@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jigu/screen/login/login_screen.dart';
-import 'package:jigu/screen/mypage/mypage_modify_screen.dart';
+import 'package:jigu/screen/mypage/mypage_common_modify_screen.dart';
 import 'package:jigu/screen/mypage/mypage_notice_screen.dart';
 import 'package:jigu/screen/mypage/mypage_question_screen.dart';
+import 'package:jigu/screen/mypage/mypage_seller_modify_screen.dart';
 import 'package:jigu/screen/mypage/mypage_setting_screen.dart';
 
 class MypageScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class MypageScreen extends StatefulWidget {
 }
 
 class _MypageScreenState extends State<MypageScreen> {
-  bool common = true;
+  var common = true;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,7 @@ class _MypageScreenState extends State<MypageScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //일반계정 프로필 정보
-
+              SizedBox(child: common ? commonProfile() : sellerProfile()),
               //나의 활동
               const SizedBox(height: 20),
               const Divider(color: Colors.grey, thickness: 1.0),
@@ -132,11 +133,12 @@ class _MypageScreenState extends State<MypageScreen> {
                     style:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
                 const SizedBox(height: 5),
-                const Text("해운대구 중동", style: TextStyle(fontSize: 15)),
+                const Text("서울 신림동", style: TextStyle(fontSize: 15)),
+                //사업자로 바뀌는 버튼
                 OutlinedButton(
                     onPressed: () {
                       setState(() {
-                        common != common;
+                        common = !common;
                       });
                     },
                     child: const Text("사업자 전환")),
@@ -147,7 +149,7 @@ class _MypageScreenState extends State<MypageScreen> {
         //프로필 수정 자리
         TextButton(
           onPressed: () {
-            Get.to(() => const MypageModifyScreen());
+            Get.to(() => const MypageCommonModifyScreen());
           },
           child: const Text(
             "프로필 수정",
@@ -170,7 +172,8 @@ class _MypageScreenState extends State<MypageScreen> {
               width: 90,
               height: 90,
               decoration: const BoxDecoration(
-                  color: Colors.grey, shape: BoxShape.circle),
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
               child: const Center(child: Text("프사")),
             ),
             const SizedBox(width: 10),
@@ -178,18 +181,19 @@ class _MypageScreenState extends State<MypageScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("매장명",
+                const Text("세븐일레븐",
                     style:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
                 const SizedBox(height: 5),
                 const Text("해운대구 중동", style: TextStyle(fontSize: 15)),
+                //일반 계정으로 바뀌는 버튼
                 OutlinedButton(
                     onPressed: () {
                       setState(() {
-                        common != common;
+                        common = !common;
                       });
                     },
-                    child: const Text("사업자 전환")),
+                    child: const Text("일반 전환")),
               ],
             ),
           ],
@@ -197,10 +201,10 @@ class _MypageScreenState extends State<MypageScreen> {
         //프로필 수정 자리
         TextButton(
           onPressed: () {
-            Get.to(() => const MypageModifyScreen());
+            Get.to(() => const MypageSellerModifyScreen());
           },
           child: const Text(
-            "프로필 수정",
+            "매장 정보 수정",
             style: TextStyle(fontSize: 15, color: Colors.grey),
           ),
         ),
