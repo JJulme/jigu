@@ -110,21 +110,23 @@ class _LoginTosScreenState extends State<LoginTosScreen> {
                 ),
               ),
             ),
-            const Spacer(), //남는 공간 차지 - 버튼을 아래로 보냄
-            //다음 버튼
-            SizedBox(
-              height: 55,
-              width: double.infinity,
-              child: ElevatedButton(
-                  onPressed: () => Get.to(() => const LoginSignupScreen()),
-                  child: const Text(
-                    "다 음",
-                    style: TextStyle(fontSize: 24),
-                  )),
-            )
           ],
         ),
       )),
+      //위치 아래 고정
+      persistentFooterButtons: [
+        Container(
+          height: 68,
+          width: double.infinity,
+          padding: const EdgeInsets.all(8),
+          child: ElevatedButton(
+              onPressed: () => Get.to(() => const LoginSignupScreen()),
+              child: const Text(
+                "다 음",
+                style: TextStyle(fontSize: 23),
+              )),
+        )
+      ],
     );
   }
 }

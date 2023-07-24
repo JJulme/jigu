@@ -184,25 +184,27 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                       Get.to(() => const LoginSignup2Screen());
                     },
                     child: const Text("샘플버튼")),
-                //https://steemit.com/kr/@anpigon/flutter
-                //다음 버튼 화면 아래 고정
-                SizedBox(
-                  height: 55,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      //올바르게 다 입력했는지 검사
-                      onPressed: () {
-                        formKey.currentState!.validate();
-                      },
-                      child: const Text(
-                        "다 음",
-                        style: TextStyle(fontSize: 24),
-                      )),
-                ),
               ],
             ),
           ),
         )),
+        //다음 버튼 화면 아래 고정
+        persistentFooterButtons: [
+          Container(
+            height: 68,
+            width: double.infinity,
+            padding: const EdgeInsets.all(8),
+            child: ElevatedButton(
+                //올바르게 다 입력했는지 검사
+                onPressed: () {
+                  formKey.currentState!.validate();
+                },
+                child: const Text(
+                  "다 음",
+                  style: TextStyle(fontSize: 23),
+                )),
+          )
+        ],
       ),
     );
   }

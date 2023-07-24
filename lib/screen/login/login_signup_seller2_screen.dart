@@ -41,21 +41,24 @@ class _LoginSignupSeller2ScreenState extends State<LoginSignupSeller2Screen> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 55,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "다 음",
-                          style: TextStyle(fontSize: 24),
-                        )),
-                  ),
                 ],
               ),
             ),
           ),
         ),
+        persistentFooterButtons: [
+          Container(
+            height: 68,
+            width: double.infinity,
+            padding: const EdgeInsets.all(8),
+            child: ElevatedButton(
+                onPressed: () {},
+                child: const Text(
+                  "다 음",
+                  style: TextStyle(fontSize: 23),
+                )),
+          )
+        ],
       ),
     );
   }

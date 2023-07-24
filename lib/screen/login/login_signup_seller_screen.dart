@@ -54,22 +54,23 @@ class _LoginSignupSellerScreenState extends State<LoginSignupSellerScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 55,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Get.to(() => const LoginSignupSeller2Screen());
-                      },
-                      child: const Text(
-                        "다 음",
-                        style: TextStyle(fontSize: 24),
-                      )),
-                ),
               ],
             ),
           ),
         )),
+        persistentFooterButtons: [
+          Container(
+            height: 68,
+            width: double.infinity,
+            padding: const EdgeInsets.all(8),
+            child: ElevatedButton(
+                onPressed: () => Get.to(() => const LoginSignupSeller2Screen()),
+                child: const Text(
+                  "다 음",
+                  style: TextStyle(fontSize: 23),
+                )),
+          )
+        ],
       ),
     );
   }
