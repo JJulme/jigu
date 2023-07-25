@@ -33,22 +33,33 @@ class _MypageSellerModifyScreenState extends State<MypageSellerModifyScreen> {
           ],
         ),
         body: SafeArea(
-            child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
-          child: Column(
-            children: [
-              Container(
-                height: 100,
-                width: 100,
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                decoration: const BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
-                child: const Center(child: Text("프사변경")),
-              ),
-              myTextField('매장명'),
-              const SizedBox(height: 15),
-            ],
+            child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+            child: Column(
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                  decoration: const BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                  child: const Center(child: Text("프사변경")),
+                ),
+                myTextField('매장명'),
+                const SizedBox(height: 15),
+                myTextField('운영시간'),
+                const SizedBox(height: 15),
+                myTextField('연락처'),
+                const SizedBox(height: 15),
+                //주차장,
+                myTextField('기타 선택 해시태그'),
+                const SizedBox(height: 15),
+                myTextField('소개글'),
+                const SizedBox(height: 15),
+              ],
+            ),
           ),
         )),
       ),

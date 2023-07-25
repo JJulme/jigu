@@ -128,7 +128,26 @@ class _SeekDetailScreenState extends State<SeekDetailScreen> {
       width: double.infinity,
       child: Row(
         children: [
-          Expanded(child: onTapField ? textFieldLarge() : textFieldSmall()),
+          Expanded(
+            child: Column(
+              children: [
+                onTapField ? textFieldLarge() : textFieldSmall(),
+                onTapField
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                  Icons.add_photo_alternate_rounded)),
+                          ElevatedButton(
+                              onPressed: () {}, child: const Text("게시"))
+                        ],
+                      )
+                    : const SizedBox(),
+              ],
+            ),
+          )
         ],
       ),
     );
