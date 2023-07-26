@@ -4,8 +4,11 @@ import 'package:jigu/screen/login/login_screen.dart';
 import 'package:jigu/screen/mypage/mypage_common_modify_screen.dart';
 import 'package:jigu/screen/mypage/mypage_notice_screen.dart';
 import 'package:jigu/screen/mypage/mypage_question_screen.dart';
-import 'package:jigu/screen/mypage/mypage_seller_modify_screen.dart';
 import 'package:jigu/screen/mypage/mypage_setting_screen.dart';
+import 'package:jigu/screen/mypage/myseller/myseller_answer_screen.dart';
+import 'package:jigu/screen/mypage/myseller/myseller_modify_screen.dart';
+import 'package:jigu/screen/mypage/myseller/myseller_news_screen.dart';
+import 'package:jigu/screen/mypage/myseller/myseller_promotion_screen.dart';
 
 class MypageScreen extends StatefulWidget {
   const MypageScreen({super.key});
@@ -57,33 +60,13 @@ class _MypageScreenState extends State<MypageScreen> {
             children: [
               //일반계정 프로필 정보
               SizedBox(child: common ? commonProfile() : sellerProfile()),
-              //나의 활동
-              const SizedBox(height: 20),
-              const Divider(color: Colors.grey, thickness: 1.0),
-              const SizedBox(height: 20),
-              const Text("나의 활동",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-              const SizedBox(height: 10),
-              mypageRouter("나의 질문", const MypageQuestionScreen()),
-              const Text("나의 답변", style: TextStyle(fontSize: 20)),
-              //관심목록
-              const SizedBox(height: 20),
-              const Divider(color: Colors.grey, thickness: 1.0),
-              const SizedBox(height: 20),
-              const Text("관심목록",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-              const SizedBox(height: 10),
-              const Text("홍보글", style: TextStyle(fontSize: 20)),
-              const Text("판매자", style: TextStyle(fontSize: 20)),
               //고객센터
-              const SizedBox(height: 20),
-              const Divider(color: Colors.grey, thickness: 1.0),
-              const SizedBox(height: 20),
+              const Divider(color: Colors.grey, thickness: 1.0, height: 35),
               const Text("고객센터",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
               const SizedBox(height: 10),
-              const Text("문의하기", style: TextStyle(fontSize: 20)),
-              const Text("공지사항", style: TextStyle(fontSize: 20)),
+              mypageRouter("문의하기", const MypageQuestionScreen()),
+              mypageRouter("공지사항", const MypageQuestionScreen()),
               OutlinedButton(
                   onPressed: () => Get.to(() => const LoginScreen()),
                   child: const Text("Login")),
@@ -114,51 +97,70 @@ class _MypageScreenState extends State<MypageScreen> {
 
   //일반프로필 설정
   Widget commonProfile() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            //프로필 사진이 들어갈 자리
-            Container(
-              width: 90,
-              height: 90,
-              decoration: const BoxDecoration(
-                  color: Colors.grey, shape: BoxShape.circle),
-              child: const Center(child: Text("프사")),
-            ),
-            const SizedBox(width: 10),
-            //닉네임, 주소 자리
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                const Text("닉네임",
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-                const SizedBox(height: 5),
-                const Text("서울 신림동", style: TextStyle(fontSize: 15)),
-                //사업자로 바뀌는 버튼
-                OutlinedButton(
-                    onPressed: () {
-                      setState(() {
-                        common = !common;
-                      });
-                    },
-                    child: const Text("사업자 전환")),
+                //프로필 사진이 들어갈 자리
+                Container(
+                  width: 90,
+                  height: 90,
+                  decoration: const BoxDecoration(
+                      color: Colors.grey, shape: BoxShape.circle),
+                  child: const Center(child: Text("프사")),
+                ),
+                const SizedBox(width: 10),
+                //닉네임, 주소 자리
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("닉네임",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w600)),
+                    const SizedBox(height: 5),
+                    const Text("서울 신림동", style: TextStyle(fontSize: 15)),
+                    //사업자로 바뀌는 버튼
+                    OutlinedButton(
+                        onPressed: () {
+                          setState(() {
+                            common = !common;
+                          });
+                        },
+                        child: const Text("사업자 전환")),
+                  ],
+                ),
               ],
+            ),
+            //프로필 수정 자리
+            TextButton(
+              onPressed: () {
+                Get.to(() => const MypageCommonModifyScreen());
+              },
+              child: const Text(
+                "프로필 수정",
+                style: TextStyle(fontSize: 15, color: Colors.grey),
+              ),
             ),
           ],
         ),
-        //프로필 수정 자리
-        TextButton(
-          onPressed: () {
-            Get.to(() => const MypageCommonModifyScreen());
-          },
-          child: const Text(
-            "프로필 수정",
-            style: TextStyle(fontSize: 15, color: Colors.grey),
-          ),
-        ),
+        //나의 활동
+        const Divider(color: Colors.grey, thickness: 1.0, height: 35),
+        const Text("나의 활동",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+        const SizedBox(height: 10),
+        mypageRouter("나의 질문", const MypageQuestionScreen()),
+        mypageRouter("나의 답변", const MypageQuestionScreen()),
+        //관심목록
+        const Divider(color: Colors.grey, thickness: 1.0, height: 35),
+        const Text("관심목록",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+        const SizedBox(height: 10),
+        mypageRouter("홍보글", const MypageQuestionScreen()),
+        mypageRouter("판매자", const MypageQuestionScreen()),
       ],
     );
   }
@@ -207,7 +209,7 @@ class _MypageScreenState extends State<MypageScreen> {
             //프로필 수정 자리
             TextButton(
               onPressed: () {
-                Get.to(() => const MypageSellerModifyScreen());
+                Get.to(() => const MysellerModifyScreen());
               },
               child: const Text(
                 "매장 정보 수정",
@@ -216,14 +218,13 @@ class _MypageScreenState extends State<MypageScreen> {
             ),
           ],
         ),
-        const Divider(color: Colors.grey, thickness: 1.0),
-        const SizedBox(height: 20),
-        const Text("매장 정보",
+        const Divider(color: Colors.grey, thickness: 1.0, height: 35),
+        const Text("매장 관리",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
         const SizedBox(height: 10),
-        mypageRouter("매장 알림 관리", const MypageQuestionScreen()),
-        mypageRouter("매장 홍보글 관리", const MypageQuestionScreen()),
-        mypageRouter("매장 답변 관리", const MypageQuestionScreen()),
+        mypageRouter("매장 소식", const MysellerNewsScreen()),
+        mypageRouter("매장 홍보글", const MysellerPromotionScreen()),
+        mypageRouter("매장 답변", const MysellerAnswerScreen()),
       ],
     );
   }

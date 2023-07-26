@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-class MypageSellerModifyScreen extends StatefulWidget {
-  const MypageSellerModifyScreen({super.key});
+class MysellerModifyScreen extends StatefulWidget {
+  const MysellerModifyScreen({super.key});
 
   @override
-  State<MypageSellerModifyScreen> createState() =>
-      _MypageSellerModifyScreenState();
+  State<MysellerModifyScreen> createState() => _MysellerModifyScreenState();
 }
 
-class _MypageSellerModifyScreenState extends State<MypageSellerModifyScreen> {
+class _MysellerModifyScreenState extends State<MysellerModifyScreen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -67,14 +66,11 @@ class _MypageSellerModifyScreenState extends State<MypageSellerModifyScreen> {
   }
 
   Widget myTextField(String text) {
-    return SizedBox(
-      height: 50,
-      child: TextField(
-        decoration: InputDecoration(
-          labelText: text,
+    return TextField(
+      decoration: InputDecoration(
+          hintText: text,
           border: const OutlineInputBorder(),
-        ),
-      ),
+          contentPadding: const EdgeInsets.all(10)),
     );
   }
 }
