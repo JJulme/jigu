@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jigu/screen/login/login_screen.dart';
+import 'package:jigu/screen/mypage/mypage_answer_screen.dart';
 import 'package:jigu/screen/mypage/mypage_common_modify_screen.dart';
 import 'package:jigu/screen/mypage/mypage_notice_screen.dart';
+import 'package:jigu/screen/mypage/mypage_noticeboard_screen.dart';
 import 'package:jigu/screen/mypage/mypage_question_screen.dart';
 import 'package:jigu/screen/mypage/mypage_setting_screen.dart';
 import 'package:jigu/screen/mypage/myseller/myseller_answer_screen.dart';
 import 'package:jigu/screen/mypage/myseller/myseller_modify_screen.dart';
 import 'package:jigu/screen/mypage/myseller/myseller_news_screen.dart';
 import 'package:jigu/screen/mypage/myseller/myseller_promotion_screen.dart';
+import 'package:jigu/screen/noticeboard/mypage_seller_screen.dart';
 
 class MypageScreen extends StatefulWidget {
   const MypageScreen({super.key});
@@ -153,14 +156,14 @@ class _MypageScreenState extends State<MypageScreen> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
         const SizedBox(height: 10),
         mypageRouter("나의 질문", const MypageQuestionScreen()),
-        mypageRouter("나의 답변", const MypageQuestionScreen()),
+        mypageRouter("나의 답변", const MypageAnswerScreen()),
         //관심목록
         const Divider(color: Colors.grey, thickness: 1.0, height: 35),
         const Text("관심목록",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
         const SizedBox(height: 10),
-        mypageRouter("홍보글", const MypageQuestionScreen()),
-        mypageRouter("판매자", const MypageQuestionScreen()),
+        mypageRouter("홍보글", const MypageNoticeboardScreen()),
+        mypageRouter("판매자", const MypageSellerScreen()),
       ],
     );
   }
