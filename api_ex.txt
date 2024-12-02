@@ -1,0 +1,56 @@
+# /place/kategorie/noticeboard
+팔아요 게시판
+[
+    {
+        "noticeboardId":1
+        "sellerId":1
+        "thumbnail":aaa
+        "title":"bbb"
+        "body":"ccc"
+    },
+    {
+        "noticeboardId":2
+        "sellerId":2
+        "thumbnail":ddd
+        "title":"eee"
+        "body":"fff"
+    },
+]
+
+# /place/seek
+찾아요 게시판
+[
+    {
+        "seekId":1
+        "userId":1
+        "thumbnail":aaa
+        "title":"bbb"
+        "body":"ccc"
+    },
+    {
+        "seekId":2
+        "userId":2
+        "thumbnail":ddd
+        "title":"eee"
+        "body":"fff"
+    },
+]
+
+# /userId/1/chat
+채팅 목록
+[
+    {
+        "chatId":1
+        "userId":1
+        "thumbnail":aaa
+        "userNick":"bbb"
+        "body":"ccc"
+    },
+    {
+        "chatId":2
+        "userId":2
+        "thumbnail":ddd
+        "userNick":"eee"
+        "body":"fff"
+    },
+]
